@@ -12,16 +12,16 @@
 
 
 
-<!--    <bean class="kroryi.spring6tomcat10.sample.SampleDAO"/>-->
-<!--    <bean class="kroryi.spring6tomcat10.sample.SampleService"/>-->
+<!--    <bean class="kroryi.spring.sample.SampleDAO"/>-->
+<!--    <bean class="kroryi.spring.sample.SampleService"/>-->
 
-    <context:component-scan base-package="kroryi.spring6tomcat10.sample"/>
+    <context:component-scan base-package="kroryi.spring"/>
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/webdb"/>
         <property name="username" value="root"/>
-        <property name="password" value="edurootroot"/>
+        <property name="password" value="1333"/>
         <property name="dataSourceProperties">
             <props>
                 <prop key="cachePrepStmts">true</prop>
@@ -39,9 +39,8 @@
         <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
     </bean>
 
-    <mybatis:scan base-package="kroryi.spring6tomcat10.mapper"/>
-    <context:component-scan base-package="kroryi.spring6tomcat10.config"/>
-
+    <mybatis:scan base-package="kroryi.spring.mapper"/>
+    <context:component-scan base-package="kroryi.spring.config"/>
 
 </beans>
 

@@ -1,4 +1,4 @@
-package kroryi.spring6tomcat10.formatter;
+package kroryi.spring.formatter;
 
 import org.springframework.format.Formatter;
 

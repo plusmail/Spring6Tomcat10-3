@@ -1,9 +1,8 @@
-package kroryi.spring6tomcat10.dto;
+package kroryi.spring.dto;
 
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @ToString
 @Data

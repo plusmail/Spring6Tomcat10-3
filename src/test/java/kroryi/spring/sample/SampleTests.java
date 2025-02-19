@@ -1,8 +1,8 @@
-package kroryi.spring6tomcat10.sample;
+package kroryi.spring.sample;
 
 
-import kroryi.spring6tomcat10.mapper.TimeMapper;
-import kroryi.spring6tomcat10.mapper.TimeMapper2;
+import kroryi.spring.mapper.TimeMapper;
+import kroryi.spring.mapper.TimeMapper2;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package kroryi.spring6tomcat10.controller;
+package kroryi.spring.controller;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;

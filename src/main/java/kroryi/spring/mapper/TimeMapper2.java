@@ -1,4 +1,4 @@
-package kroryi.spring6tomcat10.mapper;
+package kroryi.spring.mapper;
 
 public interface TimeMapper2 {
 

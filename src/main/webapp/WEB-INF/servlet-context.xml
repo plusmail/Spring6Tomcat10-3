@@ -30,14 +30,14 @@
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatters">
             <set>
-                <bean class="kroryi.spring6tomcat10.formatter.LocalDateFormatter"/>
+                <bean class="kroryi.spring.formatter.LocalDateFormatter"/>
             </set>
         </property>
     </bean>
 
     <mvc:annotation-driven conversion-service="conversionService"/>
 
-    <context:component-scan base-package="kroryi.spring6tomcat10.controller"/>
-    <context:component-scan base-package="kroryi.spring6tomcat10.exception"/>
+    <context:component-scan base-package="kroryi.spring.controller"/>
+    <context:component-scan base-package="kroryi.spring.exception"/>
 
 </beans>

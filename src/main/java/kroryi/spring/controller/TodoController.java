@@ -1,6 +1,6 @@
-package kroryi.spring6tomcat10.controller;
+package kroryi.spring.controller;
 
-import kroryi.spring6tomcat10.dto.TodoDTO;
+import kroryi.spring.dto.TodoDTO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

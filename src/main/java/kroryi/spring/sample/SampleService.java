@@ -1,4 +1,4 @@
-package kroryi.spring6tomcat10.sample;
+package kroryi.spring.sample;
 
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
