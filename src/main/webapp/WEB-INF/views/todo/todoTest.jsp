@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>todo 목록보기</h1>
+${dto}
+
 </body>
 </html>

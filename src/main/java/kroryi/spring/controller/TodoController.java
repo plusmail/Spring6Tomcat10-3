@@ -1,49 +1,57 @@
 package kroryi.spring.controller;
 
+import jakarta.validation.Valid;
 import kroryi.spring.dto.TodoDTO;
+import kroryi.spring.service.TodoService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/todo")
 @Log4j2
+@RequiredArgsConstructor
 public class TodoController {
 
-//    /todo/list
-    @RequestMapping("/list")
-    public void list(){
-        log.info("list..............");
+    private final TodoService service;
+
+
+    @GetMapping("/list")
+    public String list() {
+        log.info("todo 목록보기");
+
+        return "/todo/todoList";
     }
 
-//    @RequestMapping(value="/register", method = RequestMethod.GET)
     @GetMapping("/register")
-    public void register(){
-        log.info("Get register............");
-
-    }
-
-//    @PostMapping("/register")
-//    public void registerPost(TodoDTO todoDTO){
-//        log.info("Register post...........");
-//        log.info(todoDTO);
-//
-//    }
-
-    @PostMapping("/register-view")
-    public void ex4One(@ModelAttribute("dto") TodoDTO todoDTO, Model model){
-        log.info("ex4One............");
-        log.info(todoDTO);
-        // todoDTO 주로 Service에 넘겨줘가지고 DAO, DB 관련 데이터 가져오는 역할
-
-
-        //JSP던질때는 Model 추가 해서 던진다.
-
-        model.addAttribute("todo", todoDTO);
+    public String registerGet() {
+        log.info("GET todo 등록 페이지 보여주기....");
+        return "/todo/todoRegister";
     }
 
 
+    @PostMapping("/register")
+    public String registerPost(
+            @Valid TodoDTO todoDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
+        log.info("POST todo 등록....");
+        log.info(todoDTO.toString());
+        if(bindingResult.hasErrors()) {
+            log.error("binding 에러 발생.. ");
+            String fieldName = Objects.requireNonNull(bindingResult.getFieldError()).getField();
+            redirectAttributes.addFlashAttribute("errors", fieldName + "의 빈칸을 채우시오...");
+            return "redirect:/todo/register";
+        }
+        log.info("todoDTO -<{}", todoDTO);
+        service.register(todoDTO);
 
-
+        return "redirect:/todo/list";
+    }
 }

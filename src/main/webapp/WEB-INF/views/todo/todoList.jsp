@@ -1,14 +1,9 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Todo 목록보기</title>
 </head>
 <body>
-${todo}
-
-${todo.title}<br>
-${todo.writer}<br>
-${todo.dueDate}<br>
+<h1>글 목록보기</h1>
 </body>
 </html>
