@@ -30,7 +30,7 @@ public class TodoServiceTests {
     @Test
     public void testRegister() {
         TodoDTO dto = TodoDTO.builder()
-                .title("Test.. job111111")
+                .title("Test.. job11111111111")
                 .dueDate(LocalDate.now())
                 .writer("Test01")
                 .build();
