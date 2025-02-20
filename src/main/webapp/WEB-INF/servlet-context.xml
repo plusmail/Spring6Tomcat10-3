@@ -13,7 +13,6 @@
 
     <mvc:annotation-driven/>
 
-<!--    <img src="/images/test.jpg"></img>-->
     <mvc:resources mapping="/images/**" location="/resources/images/*"/>
     <mvc:resources mapping="/css/**" location="/resources/css/*"/>
     <mvc:resources mapping="/js/**" location="/resources/js/*"/>
@@ -22,8 +21,6 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
-<!--        localhost:8080/read-->
-<!--        /WEB-INF/views/read.jsp-->
     </bean>
 
 
@@ -36,8 +33,5 @@
     </bean>
 
     <mvc:annotation-driven conversion-service="conversionService"/>
-
-    <context:component-scan base-package="kroryi.spring.controller"/>
-    <context:component-scan base-package="kroryi.spring.exception"/>
-
+    <context:component-scan base-package="kroryi.spring"/>
 </beans>

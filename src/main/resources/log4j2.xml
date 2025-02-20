@@ -40,7 +40,7 @@
         <Root level="INFO">
             <AppenderRef ref="Console"/>
         </Root>
-        <Logger name="kroryi.spring" level="INFO" additivity="false">
+        <Logger name="kroryi.spring" level="TRACE" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="file"/>
             <AppenderRef ref="RollingFile_Daily"/>

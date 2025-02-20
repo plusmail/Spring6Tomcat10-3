@@ -9,4 +9,30 @@
         INSERT INTO tbl_todo (title, dueDate, writer)
         VALUES (#{title}, #{dueDate}, #{writer})
     </insert>
+
+    <select id="selectAll" resultType="kroryi.spring.vo.TodoVO">
+        SELECT * FROM tbl_todo order by tno desc
+    </select>
+
+    <select id="selectList" resultType="kroryi.spring.vo.TodoVO">
+#         skip은 PageRequestDTO의 getSkip()이다. 소문자로 get을 제외하고 사용
+        SELECT * FROM tbl_todo order by tno desc limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT count(tno) from tbl_todo
+    </select>
+
+
+    <select id="selectOne" resultType="kroryi.spring.vo.TodoVO">
+        SELECT * FROM tbl_todo where tno = #{tno}
+    </select>
+
+    <delete id="delete">
+        DELETE from tbl_todo where tno = #{tno}
+    </delete>
+
+    <update id="update">
+        UPDATE tbl_todo set title = #{title}, dueDate = #{dueDate}, finished = #{finished} WHERE tno = #{tno}
+    </update>
 </mapper>

@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Todo 등록화면</h1>
-<h2>${errors}</h2>
+<%--<h2>${errors}</h2>--%>
 <form action="/todo/register" method="post">
     <div>
         제목: <input type="text" name="title">
@@ -25,4 +25,11 @@
     </div>
 </form>
 </body>
+<script>
+    const serverValidResult = {}
+    <c:forEach items="${errors}" var="error">
+      serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
+    </c:forEach>
+    console.log(serverValidResult)
+</script>
 </html>
