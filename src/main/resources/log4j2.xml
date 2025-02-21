@@ -2,18 +2,21 @@
 <Configuration>
     <Properties>
         <Property name="logNm">Log4j2</Property>
-        <!--        <Property name="layoutPattern">%style{%d{yyyy/MM/dd HH:mm:ss}}{cyan} %highlight{[%-5p]}{FATAL=bg_red, ERROR=red, INFO=green, DEBUG=blue} [%C] %style{[%t]}{yellow} %m%n</Property>-->
-        <Property name="layoutPattern">%highlight{[%-5p]}{FATAL=bg_red, ERROR=red, INFO=yellow, DEBUG=blue} [%C] %m%n
-        </Property>
+        <Property name="layoutPattern">%highlight{[%-5p]}{FATAL=bg_red, ERROR=red, INFO=yellow, DEBUG=blue} [%C] %m%n</Property>
     </Properties>
+
     <Appenders>
+        <!-- 콘솔 로그 -->
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${layoutPattern}" disableAnsi="false"/> <!-- ANSI 활성화 -->
+            <PatternLayout pattern="${layoutPattern}" disableAnsi="false"/>
         </Console>
+
+        <!-- 일반 로그 파일 -->
         <File name="file" fileName="C:/Users/edu/IdeaProjects/spring01_1/logs/jdbc_study.log" append="true">
             <PatternLayout pattern="[%-5level] [%d{yyyy-MM-dd HH:mm:ss}] %m%n"/>
         </File>
-        <!-- 일자별 로그 -->
+
+        <!-- 일자별 로그 (파일이 커지는 것을 방지) -->
         <RollingFile name="RollingFile_Daily"
                      fileName="C:/Users/edu/IdeaProjects/spring01_1/logs/time-based-logs/jdbc_study_time_log.log"
                      filePattern="C:/Users/edu/IdeaProjects/spring01_1/logs/time-based-logs/jdbc_study_time_log-%d{yyyy-MM-dd}.log">
@@ -21,47 +24,52 @@
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
-            <DefaultRolloverStrategy max="5"/>
+            <DefaultRolloverStrategy max="10"/>
         </RollingFile>
 
-        <!-- 특정크기마다 백업하여 로그 -->
+        <!-- 크기 기반 로그 롤링 (일정 크기 초과 시 새 파일 생성) -->
         <RollingFile name="RollingFile_FileSize"
                      fileName="C:/Users/edu/IdeaProjects/spring01_1/logs/size-based-logs/jdbc_study_size_log.log"
-                     filePattern="C:/Users/edu/IdeaProjects/spring01_1/logs/size-based-logs/jdbc_study_size_log-%d{yyyy-MM-dd-hh}-%i.log.zip">
+                     filePattern="C:/Users/edu/IdeaProjects/spring01_1/logs/size-based-logs/jdbc_study_size_log-%d{yyyy-MM-dd-HH}-%i.log.zip">
             <PatternLayout pattern="[%-5level] [%d{yyyy-MM-dd HH:mm:ss a}] %m%n"/>
             <Policies>
-                <SizeBasedTriggeringPolicy size="50 KB"/> <!-- 50KB로 조정 -->
+                <SizeBasedTriggeringPolicy size="100MB"/> <!-- 기존 50KB → 100MB로 증가 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
-            <DefaultRolloverStrategy max="5"/>
+            <DefaultRolloverStrategy max="10"/> <!-- 기존 5개 → 10개로 증가 -->
         </RollingFile>
-
     </Appenders>
+
     <Loggers>
         <Root level="INFO">
             <AppenderRef ref="Console"/>
         </Root>
+
         <Logger name="kroryi.spring" level="TRACE" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="file"/>
             <AppenderRef ref="RollingFile_Daily"/>
-            <AppenderRef ref="RollingFile_FileSize"/>
+<!--            <AppenderRef ref="RollingFile_FileSize"/>-->
         </Logger>
+
         <Logger name="kroryi.spring.mapper" level="TRACE" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="file"/>
         </Logger>
+
         <Logger name="org.springframework" level="ERROR" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="file"/>
         </Logger>
+
         <Logger name="com.zaxxer.hikari" level="ERROR" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="file"/>
         </Logger>
+
         <Logger name="org.apache.ibatis" level="TRACE" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="file"/>
         </Logger>
-
     </Loggers>
 </Configuration>

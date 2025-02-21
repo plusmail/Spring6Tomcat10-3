@@ -45,11 +45,11 @@
 </body>
 <script>
     document.querySelector(".btn-primary").addEventListener("click", (e)=>{
-        self.location = "/todo/modify/${dto.tno}"
+        self.location = "/todo/modify/${dto.tno}?${reqDTO.link}"
     }, false)
 
     document.querySelector(".btn-secondary").addEventListener("click", (e)=>{
-        self.location = "/todo/list"
+        self.location = "/todo/list?${reqDTO.link}"
     }, false)
 
 </script>

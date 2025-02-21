@@ -8,7 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.time.LocalDate;
+
+@Slf4j
 @Builder
 @Data
 @AllArgsConstructor
@@ -29,12 +35,64 @@ public class PageRequestDTO {
     @Min(value = 5)
     @Max(value = 100)
     @Positive
-    private int size = 10;
+    private int size = 5;
+
+    @Builder.Default
+    @Min(value = 2)
+    @Max(value = 20)
+    @Positive
+    private int pageListSize = 2;
+
+    private String link;
+
+    private String[] types;
+    private String keyword;
+    private boolean finished;
+    private LocalDate from ;
+    private LocalDate to ;
 
 
-    public int getSkip(){
+    public int getSkip() {
         return (page - 1) * size;
     }
+
+//    public String getLink() {
+//        if (link == null) {
+//            StringBuffer buffer = new StringBuffer();
+//            buffer.append("page=").append(page)
+//                    .append("&size=").append(size)
+//                    .append("&pageListSize=").append(pageListSize);
+//
+//            link = buffer.toString();
+//        }
+//        log.info("link----> {}", link);
+//
+//        return link;
+//    }
+
+    public String getLink() {
+        StringBuilder buffer = new StringBuilder();
+        buffer.append("page=").append(this.page);
+        buffer.append("&size=").append(this.size);
+
+        if(types != null && types.length > 0) {
+            for(String type : types) {
+                buffer.append("&types=").append(type);
+            }
+        }
+        if(keyword != null && !keyword.isEmpty()) {
+            try {
+                buffer.append("&keyword=").append(URLEncoder.encode(keyword, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+               e.printStackTrace();
+            }
+        }
+
+
+        return buffer.toString();
+
+    }
+
 
 
 }

@@ -1,5 +1,7 @@
 package kroryi.spring;
 
+import kroryi.spring.dto.PageRequestDTO;
+import kroryi.spring.dto.PageResponseDTO;
 import kroryi.spring.dto.TodoDTO;
 import kroryi.spring.service.TodoService;
 import lombok.extern.log4j.Log4j2;
@@ -40,5 +42,31 @@ public class TodoServiceTests {
                 .writer("Test01")
                 .build();
         service.register(dto);
+    }
+
+    @Test
+    public void testPaging(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(2)
+                .size(10)
+                .build();
+
+        PageResponseDTO<TodoDTO> pageResponseDTO = service.getList(pageRequestDTO);
+        log.info(pageResponseDTO.toString());
+
+    }
+
+    @Test
+    public void testSearch(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .keyword("111")
+                .types(new String[]{"t", "w"})
+                .build();
+
+        PageResponseDTO<TodoDTO> pageResponseDTO = service.getList(pageRequestDTO);
+        log.info(pageResponseDTO.toString());
+
     }
 }

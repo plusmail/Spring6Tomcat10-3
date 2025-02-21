@@ -1,10 +1,13 @@
 package kroryi.spring.dto;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class PageResponseDTO<E> {
     private int page;
     private int size;
@@ -17,6 +20,7 @@ public class PageResponseDTO<E> {
 
     private List<E> dtoList;
 
+    // 수동의 생성 만들어야 함. @AllArgsConstructor 사용하면 문제 발생 할 수 있다.
     // withAll 빌더 메서드 이름 변경.
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO,
@@ -28,8 +32,8 @@ public class PageResponseDTO<E> {
         this.total = total;
         this.dtoList = dtoList;
 
-        this.end = (int) (Math.ceil(this.page / 10.0)) * 10;
-        this.start  = this.end - 9;
+        this.end = (int) (Math.ceil((double) this.page / pageRequestDTO.getPageListSize())) * pageRequestDTO.getPageListSize();
+        this.start  = this.end - (pageRequestDTO.getPageListSize() -1);
 
         int last = (int) Math.ceil((double) total /size);
         this.end = end > last ? last : end;

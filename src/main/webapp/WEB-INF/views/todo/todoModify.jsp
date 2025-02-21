@@ -51,7 +51,7 @@
     document.querySelector(".btn-danger").addEventListener("click", (e)=>{
         e.preventDefault();
         e.stopPropagation();
-        formObj.action = "/todo/remove/${dto.tno}";
+        formObj.action = "/todo/remove/${dto.tno}?${reqDTO.link}";
         formObj.method ="post";
         formObj.submit();
     })
@@ -60,7 +60,7 @@
         // e.preventDefault();
         // e.stopPropagation();
         // submit 일때는 데이터 전송 문제 발생 기본 submit로 전송필요.
-        formObj.action = "/todo/modify/${dto.tno}";
+        formObj.action = "/todo/modify/${dto.tno}?${reqDTO.link}";
         formObj.method ="post";
         formObj.submit();
     })
@@ -68,7 +68,7 @@
     document.querySelector(".btn-secondary").addEventListener("click", (e)=>{
         e.preventDefault();
         e.stopPropagation();
-        formObj.action = "/todo/list";
+        formObj.action = "/todo/list?${reqDTO.link}";
         formObj.method ="get";
         formObj.submit();
     })

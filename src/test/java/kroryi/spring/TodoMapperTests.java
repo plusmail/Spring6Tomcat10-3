@@ -63,5 +63,21 @@ public class TodoMapperTests {
 
     }
 
+    @Test
+    public void testSelectSearch(){
+        PageRequestDTO reqDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .types(new String[]{})
+//                .keyword("1111")
+                .finished(true)
+                .from(LocalDate.of(2025,2,19))
+                .to(LocalDate.of(2025,2,28))
+                .build();
+
+        List<TodoVO> voList = mapper.selectList(reqDTO);
+        voList.forEach(vo -> log.info(vo));
+    }
+
 
 }
